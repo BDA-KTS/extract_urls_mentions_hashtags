@@ -1,7 +1,7 @@
 # Extract Entities (URLs, Mentions, Hashtags)
 
 ## Description
-The method extracts useful entities from social media posts such as URLs, hashtags, cashtags ($ and €), mentions (including Mustodon mentions), quoted texts, punctuations, punctuation emphasis (e.g., !!!), all caps words, negations, time expressions (e.g., today, next week), and emojis. It's a very simple method using only regular expressions to determine the mentioned entities. The method reads data from a CSV file with posts per row and writes output to a CSV file having post text and the extracted entities as respective columns.
+The method extracts useful entities from social media posts such as URLs, hashtags, cashtags ($ and €), mentions (including Mastodon mentions), quoted texts, punctuations, punctuation emphasis (e.g., !!!), all caps words, negations, time expressions (e.g., today, next week), and emojis. It's a very simple method using only regular expressions to determine the mentioned entities. The method reads data from a CSV file with posts per row and writes output to a CSV file having post text and the extracted entities as respective columns.
 
 ## Use Cases
 To extract entities mentioned in social media posts, e.g., URLs, hashtags, emojis, etc., contributing to analyzing social behavior among user groups
