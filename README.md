@@ -1,16 +1,16 @@
 # Extract Entities (URLs, Mentions, Hashtags)
 
 ## Description
-The method extracts useful entities from social media posts such as URLs, hashtags, mentions and emojis. The method reads social media posts from the file, extract useful entities and stores the output as json file with lists of entitites extracted from each document.
+The method extracts useful entities from social media posts such as URLs, hashtags, cashtags ($ and €), mentions, quoted texts, punctuations, punctuation emphasis (e.g., !!!), all caps words, negations, time expressions (e.g., today, next week), and emojis. Its a very simple method using only regular expressions to determine the mentioned entities. The method reads data from CSV file with posts per row and writes output to CSV file having post text and the extracted entities as respective columns.
 
-## Use Case
-Social scientists interested in analyzing the mention of entities e.g., URLs, hashtags etc. the compare the entity sharing behavior of two groups of social media posts
+## Use Cases
+To extract entities mentioned in social media posts e.g., URLs, hashtags, emojis etc., contributing to analyzing social behavior among user groups
 
 ## Input data
-The method uses regular expressions to identify different entities in text and therefore can be used for any type of text. For demonstration, we use auto-generated social media posts.
+The input data consists of consists of social media posts (one per line) as a CSV file, i.e., `data/input_social_posts.csv`. Following are few examples; 
 
-|Social Media Posts|
-|--------|
+|post_text|
+|---------|
 |Check out my new blog post on #MachineLearning here: https://mlblog.example.com 🔥 @techguru|
 |Had an amazing workout today! 💪 #FitnessGoals #StayHealthy @fitness_pro|
 |Visit https://travel.example.com for the best vacation deals! 🏖️ #TravelMore @explore_worldwide|
@@ -24,20 +24,34 @@ The method uses regular expressions to identify different entities in text and t
 
 
 ## Output Data
-The entities extracted are writen into a file using JSON format.
+The method writes output back to a CSV file, i.e., `data/output_posts_with_entities.csv`. It has first column as the original posts text followed by columns representing entities extracted from the text. In case there are multiple entities of a type e.g., two or mentions then they presented as a list in its column.
 
 ```
-{"docs": 10, "entities": [{"doc-0": {"urls": ["https://mlblog.example.com"], "mentions": ["@techguru"], "hashtags": ["#MachineLearning"], "emojis": ["\ud83d\udd25"]}}, {"doc-1": {"urls": [], "mentions": ["@fitness_pro"], "hashtags": ["#FitnessGoals", "#StayHealthy"], "emojis": ["\ud83d\udcaa"]}}, {"doc-2": {"urls": ["https://travel.example.com"], "mentions": ["@explore_worldwide"], "hashtags": ["#TravelMore"], "emojis": ["\ud83c\udfd6"]}}, {"doc-3": {"urls": ["https://funny.example.com"], "mentions": ["@memelord"], "hashtags": ["#Comedy", "#LOL"], "emojis": ["\ud83d\ude02"]}}, {"doc-4": {"urls": ["https://cookwithus.example.com\""], "mentions": ["@recipe_magic"], "hashtags": ["#HomeChef", "#YummyFood"], "emojis": ["\ud83c\udf73"]}}, {"doc-5": {"urls": [], "mentions": ["@wellnessguru"], "hashtags": ["#Mindfulness", "#Relaxation"], "emojis": ["\ud83e\uddd8\u200d\u2642\ufe0f"]}}, {"doc-6": {"urls": ["https://gameupdate.example.com"], "mentions": ["@gamezone"], "hashtags": ["#GamingLife"], "emojis": ["\ud83c\udfae"]}}, {"doc-7": {"urls": ["https://weekendfun.example.com"], "mentions": ["@weekender_vibes"], "hashtags": ["#GoodVibesOnly"], "emojis": ["\ud83c\udf89"]}}, {"doc-8": {"urls": ["https://saveearth.example.com\""], "mentions": ["@environment_care"], "hashtags": ["#ClimateChange", "#GoGreen"], "emojis": ["\ud83c\udf0d"]}}, {"doc-9": {"urls": ["https://readmore.example.com\""], "mentions": ["@bookclub"], "hashtags": ["#BookLovers", "#MustRead"], "emojis": ["\ud83d\udcda"]}}]}
+,post_text,mentions,hashtags,cashtags,urls,quoted_text,punctuations,punctuation_emphasis,all_caps,negations,time_expressions,emojis
+0,"@bob@infosec.exchange #Crypto €BMW ""Let’s go!"" https://t.co/xyz123 😀",['@bob@infosec.exchange'],['#Crypto'],['€BMW'],['https://t.co/xyz123'],"[('Let’s go!', '')]","['@', '@', '.', '#', '€', '""', '’', '!', '""', ':', '/', '/', '.', '/', '😀']",[],['BMW'],[],[],['😀']
+1,#Startups 💡 $GOOG https://t.co/xyz123 @dave@mastodon.social 'Not sure about this',['@dave@mastodon.social'],['#Startups'],['$GOOG'],['https://t.co/xyz123'],"[('', 'Not sure about this')]","['#', '💡', '$', ':', '/', '/', '.', '/', '@', '@', '.', ""'"", ""'""]",[],['GOOG'],['not'],[],['💡']
+2,@bob@mastodon.social $AAPL 'This is amazing' 😀 #Crypto https://news.site/article,['@bob@mastodon.social'],['#Crypto'],['$AAPL'],['https://news.site/article'],"[('', 'This is amazing')]","['@', '@', '.', '$', ""'"", ""'"", '😀', '#', ':', '/', '/', '.', '/']",[],['AAPL'],[],[],['😀']
+3,"@dave@infosec.exchange ""Exciting times ahead!"" https://t.co/xyz123 €BMW #AI 😀",['@dave@infosec.exchange'],['#AI'],['€BMW'],['https://t.co/xyz123'],"[('Exciting times ahead!', '')]","['@', '@', '.', '""', '!', '""', ':', '/', '/', '.', '/', '€', '#', '😀']",[],"['BMW', 'AI']",[],['times'],['😀']
+4,#AI @bob@mastodon.social €ETH 🚀 'Not sure about this' https://news.site/article,['@bob@mastodon.social'],['#AI'],['€ETH'],['https://news.site/article'],"[('', 'Not sure about this')]","['#', '@', '@', '.', '€', '🚀', ""'"", ""'"", ':', '/', '/', '.', '/']",[],"['AI', 'ETH']",['not'],[],['🚀']
+5,'This is amazing' €BMW https://t.co/xyz123 💡 #AI @dave,['@dave'],['#AI'],['€BMW'],['https://t.co/xyz123'],"[('', 'This is amazing')]","[""'"", ""'"", '€', ':', '/', '/', '.', '/', '💡', '#', '@']",[],"['BMW', 'AI']",[],[],['💡']
+6,'These days are amazing' #TechNews https://t.co/xyz123 €ETH 💡 @dave@techhub.org,['@dave@techhub.org'],['#TechNews'],['€ETH'],['https://t.co/xyz123'],"[('', 'These days are amazing')]","[""'"", ""'"", '#', ':', '/', '/', '.', '/', '€', '💡', '@', '@', '.']",[],['ETH'],[],['days'],['💡']
+7,"What a day today #AI $GOOG @bob@techhub.org 🚀 https://news.site/article""",['@bob@techhub.org'],['#AI'],['$GOOG'],"['https://news.site/article""']",[],"['#', '$', '@', '@', '.', '🚀', ':', '/', '/', '.', '/', '""']",[],"['AI', 'GOOG']",[],"['day', 'today']",['🚀']
+8,"https://news.site/article #TechNews ""Exciting times ahead!"" @eve@mastodon.social 😀 $GOOG",['@eve@mastodon.social'],['#TechNews'],['$GOOG'],['https://news.site/article'],"[('Exciting times ahead!', '')]","[':', '/', '/', '.', '/', '#', '""', '!', '""', '@', '@', '.', '😀', '$']",[],['GOOG'],[],['times'],['😀']
+9,"Let’s go! https://t.co/xyz123 @alice@mastodon.social $TSLA #AI 🔥""",['@alice@mastodon.social'],['#AI'],['$TSLA'],['https://t.co/xyz123'],[],"['’', '!', ':', '/', '/', '.', '/', '@', '@', '.', '$', '#', '🔥', '""']",[],"['TSLA', 'AI']",[],[],['🔥']
+10,"$TSLA 🔥 @bob@infosec.exchange ""Exciting times ahead!"" #AI https://t.co/xyz123",['@bob@infosec.exchange'],['#AI'],['$TSLA'],['https://t.co/xyz123'],"[('Exciting times ahead!', '')]","['$', '🔥', '@', '@', '.', '""', '!', '""', '#', ':', '/', '/', '.', '/']",[],"['TSLA', 'AI']",[],['times'],['🔥']
 ```
 
 ## Hardware Requirements
-The method runs on a cheap virtual machine provided by cloud computing company (2 x86 CPU core, 4 GB RAM, 40GB HDD). 
+The method runs on a small virtual machine provided by a cloud computing company (2 x86 CPU core, 4 GB RAM, 40GB HDD).  
   
 ## Environmental Setup
 Executing the `requirements.txt` file using command `pip install -r requirements.txt` will deploy the working environment
 
 ## How to Use
-Open the notebook `extract_entities.ipynb` and call the method `extract_entities(text)` for each text item in a loop. The method itself is defined in the notebook as well.
+
+- Update the input file with your own data (optional)
+- Execute main.py file using command `python main.py`
+- *It imports functions from entity_extractor.py*
 
 ## Contact
 [taimoor.khan@gesis.org](mailto:taimoor.khan@gesis.org)
