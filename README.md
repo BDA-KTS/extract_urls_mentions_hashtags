@@ -21,7 +21,7 @@ The input data consists of consists of social media posts (one per line) as a CS
 ## Output Data
 The method writes output back to a CSV file, i.e., `data/output_posts_with_entities.csv`. It has the first column as the original post's text, followed by columns representing entities extracted from the text. Each column value is a list of one or more entities extracted from a post.
 
-
+```
 | # | post_text | mentions | hashtags | cashtags | URLs | quoted_text | punctuations | punctuation_emphasis | all_caps | negations | time_expressions | emojis |
 | - | --------- | -------- | -------- | -------- | ---- | ----------- | ------------ | -------------------- | -------- | --------- | ---------------- | ------ |
 |0|...|['@bob@infosec.exchange']|['#Crypto']|['€BMW']|['https://t.co/xyz123']|"[('Let’s go!', '')]"|"['@', '@', '.', '#', '€', '""', '’', '!', '""', ':', '/', '/', '.', '/', '😀']"|[]|['BMW']|[]|[]|['😀']|
@@ -29,7 +29,7 @@ The method writes output back to a CSV file, i.e., `data/output_posts_with_entit
 |2|...|['@bob@mastodon.social']|['#Crypto']|['$AAPL']|['https://news.site/article']|"[('', 'This is amazing')]"|"['@', '@', '.', '$', ""'"", ""'"", '😀', '#', ':', '/', '/', '.', '/']"|[]|['AAPL']|[]|[]|['😀']|
 |3|...|['@dave@infosec.exchange']|['#AI']|['€BMW']|['https://t.co/xyz123']|"[('Exciting times ahead!', '')]"|"['@', '@', '.', '""', '!', '""', ':', '/', '/', '.', '/', '€', '#', '😀']"|[]|"['BMW', 'AI']"|[]|['times']|['😀']|
 |4|...|['@bob@mastodon.social']|['#AI']|['€ETH']|['https://news.site/article']|"[('', 'Not sure about this')]"|"['#', '@', '@', '.', '€', '🚀', ""'"", ""'"", ':', '/', '/', '.', '/']"|[]|"['AI', 'ETH']"|['not']|[]|['🚀']|
-
+```
 ## Hardware Requirements
 The method runs on a small virtual machine provided by a cloud computing company (2 x86 CPU core, 4 GB RAM, 40GB HDD).  
   
