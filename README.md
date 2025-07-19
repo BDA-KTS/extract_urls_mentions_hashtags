@@ -1,13 +1,13 @@
 # Extract Entities (URLs, Mentions, Hashtags)
 
 ## Description
-The method extracts useful entities from social media posts such as URLs, hashtags, cashtags ($ and €), mentions, quoted texts, punctuations, punctuation emphasis (e.g., !!!), all caps words, negations, time expressions (e.g., today, next week), and emojis. Its a very simple method using only regular expressions to determine the mentioned entities. The method reads data from CSV file with posts per row and writes output to CSV file having post text and the extracted entities as respective columns.
+The method extracts useful entities from social media posts such as URLs, hashtags, cashtags ($ and €), mentions (including Mustodon mentions), quoted texts, punctuations, punctuation emphasis (e.g., !!!), all caps words, negations, time expressions (e.g., today, next week), and emojis. It's a very simple method using only regular expressions to determine the mentioned entities. The method reads data from a CSV file with posts per row and writes output to a CSV file having post text and the extracted entities as respective columns.
 
 ## Use Cases
-To extract entities mentioned in social media posts e.g., URLs, hashtags, emojis etc., contributing to analyzing social behavior among user groups
+To extract entities mentioned in social media posts, e.g., URLs, hashtags, emojis, etc., contributing to analyzing social behavior among user groups
 
 ## Input data
-The input data consists of consists of social media posts (one per line) as a CSV file, i.e., `data/input_social_posts.csv`. Following are few examples; 
+The input data consists of consists of social media posts (one per line) as a CSV file, i.e., `data/input_social_posts.csv`. The following are a few examples; 
 
 |post_text|
 |---------|
@@ -24,7 +24,7 @@ The input data consists of consists of social media posts (one per line) as a CS
 
 
 ## Output Data
-The method writes output back to a CSV file, i.e., `data/output_posts_with_entities.csv`. It has first column as the original posts text followed by columns representing entities extracted from the text. In case there are multiple entities of a type e.g., two or mentions then they presented as a list in its column.
+The method writes output back to a CSV file, i.e., `data/output_posts_with_entities.csv`. It has the first column as the original post's text, followed by columns representing entities extracted from the text. In case there are multiple entities mentioned, the entities are presented as a list.
 
 ```
 ,post_text,mentions,hashtags,cashtags,urls,quoted_text,punctuations,punctuation_emphasis,all_caps,negations,time_expressions,emojis
@@ -45,12 +45,12 @@ The method writes output back to a CSV file, i.e., `data/output_posts_with_entit
 The method runs on a small virtual machine provided by a cloud computing company (2 x86 CPU core, 4 GB RAM, 40GB HDD).  
   
 ## Environmental Setup
-Executing the `requirements.txt` file using command `pip install -r requirements.txt` will deploy the working environment
+Executing the `requirements.txt` file using the command `pip install -r requirements.txt` will deploy the working environment
 
 ## How to Use
 
-- Update the input file with your own data (optional)
-- Execute main.py file using command `python main.py`
+- Update the input file with social media posts, one per line (optional: already has sample posts)
+- Execute the `main.py` file using the command `python main.py`
 - *It imports functions from entity_extractor.py*
 
 ## Contact
