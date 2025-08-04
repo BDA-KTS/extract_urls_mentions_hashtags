@@ -48,4 +48,4 @@ Executing the `requirements.txt` file using the command `pip install -r requirem
 
 ## Contact
 
-[taimoor.khan@gesis.org](mailto:taimoor.khan@gesis.org)
+For queries, please contact, <taimoor.khan@gesis.org>
