@@ -43,9 +43,9 @@ Executing the `requirements.txt` file using the command `pip install -r requirem
 
 ## How to Use
 
-- Run the 
-- Execute the `main.py` file using the command `python main.py`
-- *It imports functions from entity_extractor.py*
+Run code cells of the `index.ipynb` notebook 
+
+*It imports functions from entity_extractor.py*
 
 ## Contact
 
