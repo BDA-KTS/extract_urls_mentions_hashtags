@@ -41,6 +41,10 @@ The method runs on a small virtual machine provided by a cloud computing company
 
 Executing the `requirements.txt` file using the command `pip install -r requirements.txt` will deploy the working environment.
 
+Please note that the requirements.txt contains fixed versions that require Python 3.10. If you want to use it with newer versions of Python, update the requirements.txt accordingly (or unpin the versions).
+
+Alternatively, there's a Pipfile to install the method with [pipenv](https://pipenv.pypa.io/en/stable/)
+
 ## How to Use
 
 Run code cells of the `index.ipynb` notebook 
