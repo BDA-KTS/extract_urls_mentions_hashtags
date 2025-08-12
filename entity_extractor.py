@@ -12,7 +12,7 @@ def extract_entities(ls_posts):
         "Cashtags":r'[\$\€][A-Za-z]{1,10}',                                                            # cash tags (only $ and €)
         "URLs": r'https?://\S+|www\.\S+',                                                              # urls
         "Quoted_text" : r'"[^"]*"|\'[^\']*\'',                                                         # quotations  
-        #"punctuations": r'[^\w\s]',                                                                   # punctuations
+        "Punctuations": r'[^\w\s]',                                                                   # punctuations
         "Punctuation_emphasis": r'!{2,}|\?{2,}|\.{2,}',                                                # emphasis on ? and ! punctuations
         "All_caps": r'\b(?:[A-Z]{2,})\b',                                                              # All caps words
         "Negations": r'\b(not|no|never|none|n\'t)\b',                                                  # use of negations (no, not never, none)
@@ -21,7 +21,7 @@ def extract_entities(ls_posts):
     }
 
     # extract entities from each post
-    dict_entities = {'Posts':[], 'Mentions':[], 'Hashtags':[], 'Cashtags':[], 'URLs':[], 'Quoted_text':[], #'punctuations':[], 
+    dict_entities = {'Posts':[], 'Mentions':[], 'Hashtags':[], 'Cashtags':[], 'URLs':[], 'Quoted_text':[], 'Punctuations':[], 
     'Punctuation_emphasis':[], 'All_caps':[], 'Negations': [], 'Time_expressions':[], 'Emojis':[]}
     
     dict_entities['Posts'] = ls_posts
