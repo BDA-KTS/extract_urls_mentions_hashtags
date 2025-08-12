@@ -25,13 +25,13 @@ The input data consists of social media posts (one per line) as a CSV file, i.e.
 
 The method writes output to a CSV file, i.e., `data/output_posts_with_entities.csv`. It has the first column as the original post's text, followed by columns representing entities extracted from the text. Each column value is a list of one or more entities extracted from a post.
 
-| Posts | Mentions | Hashtags | Cashtags | URLs | Quoted_text | Punctuation_emphasis | All_caps | Negations | Time_expressions | Emojis |
-| --------- | -------- | -------- | ---- | ----------- | ------------ | -------------------- | -------- | --------- | ---------------- | ------ |
-|"@bob@infosec.exchange #Crypto €BMW ""Let’s go!"" https://t.co/xyz123 😀"|	['@bob@infosec.exchange']|	['#Crypto']	|['€BMW']	|['https://t.co/xyz123']	|"['""Let’s go!""']"|	[]	|['BMW']|	[]|	[]|	['😀']|
-|"#Startups 💡 \$GOOG https://t.co/xyz123 @dave@mastodon.social 'Not sure about this'"|['@dave@mastodon.social']	|['#Startups']	|['\$GOOG']	|['https://t.co/xyz123']	|"[""'Not sure about this'""]"	|[]	|['GOOG']|	['not']	|[]	|['💡']|
-|@bob@mastodon.social \$AAPL 'This is amazing' 😀 #Crypto https://news.site/article|	['@bob@mastodon.social']|	['#Crypto']|	['\$AAPL']|	['https://news.site/article']|	"[""'This is amazing'""]"|	[]|	['AAPL']|	[]|	[]|	['😀']|
-|"@dave@infosec.exchange ""Exciting times ahead!"" https://t.co/xyz123 €BMW #AI 😀"	|['@dave@infosec.exchange']|	['#AI']|	['€BMW']|	['https://t.co/xyz123']|	"['""Exciting times ahead!""']"|	[]|	['BMW', 'AI']|	[]|	['times']|	['😀']|
-|#AI @bob@mastodon.social €ETH 🚀 'Not sure about this' https://news.site/article |	['@bob@mastodon.social']|	['#AI']|	['€ETH']|	['https://news.site/article']|	"[""'Not sure about this'""]"|	[]|	['AI', 'ETH']|	['not']|	[]|	['🚀']|
+| Posts | Mentions | Hashtags | Cashtags | URLs | Quoted_text | Punctuations | Punctuation_emphasis | All_caps | Negations | Time_expressions | Emojis |
+|:-----:|:--------:|:--------:|:--------:|:----:|:-----------:|:------------:|:--------------------:|:--------:|:---------:|:----------------:|:------:|
+|"@bob@infosec.exchange #Crypto €BMW ""Let’s go!"" https://t.co/xyz123 😀"|	['@bob@infosec.exchange']|	['#Crypto']	|['€BMW']	|['https://t.co/xyz123']	|"['""Let’s go!""']"|	[@, @, ., #, €, ", ’, !, ", :, /, /, ., /, 😀] | []	|['BMW']|	[]|	[]|	['😀']|
+|"#Startups 💡 \$GOOG https://t.co/xyz123 @dave@mastodon.social 'Not sure about this'"|['@dave@mastodon.social']	|['#Startups']	|['\$GOOG']	|['https://t.co/xyz123']	|"[""'Not sure about this'""]"	| [#, 💡, \$, :, /, /, ., /, @, @, ., ', '] | []	|['GOOG']|	['not']	|[]	|['💡']|
+|@bob@mastodon.social \$AAPL 'This is amazing' 😀 #Crypto https://news.site/article|	['@bob@mastodon.social']|	['#Crypto']|	['\$AAPL']|	['https://news.site/article']|	"[""'This is amazing'""]"| [@, @, ., $, ', ', 😀, #, :, /, /, ., /] |	[]|	['AAPL']|	[]|	[]|	['😀']|
+|"@dave@infosec.exchange ""Exciting times ahead!"" https://t.co/xyz123 €BMW #AI 😀"	|['@dave@infosec.exchange']|	['#AI']|	['€BMW']|	['https://t.co/xyz123']|	"['""Exciting times ahead!""']"|	[@, @, ., ", !, ", :, /, /, ., /, €, #, 😀]	 | []|	['BMW', 'AI']|	[]|	['times']|	['😀']|
+|#AI @bob@mastodon.social €ETH 🚀 'Not sure about this' https://news.site/article |	['@bob@mastodon.social']|	['#AI']|	['€ETH']|	['https://news.site/article']|	"[""'Not sure about this'""]"|	[#, @, @, ., €, 🚀, ', ', :, /, /, ., /]	| []|	['AI', 'ETH']|	['not']|	[]|	['🚀']|
 
 ## Hardware Requirements
 
