@@ -6,7 +6,14 @@ The method extracts useful entities from social media posts such as URLs, hashta
 
 ## Use Cases
 
-This method can be used to extract entities mentioned in social media posts, e.g., URLs, hashtags, emojis, etc., contributing to the analysis of social behavior among user groups.
+- Social listening and brand monitoring: detect mentions and hashtags to track when a brand, product, or individual is discussed across platforms (Twitter, Mastodon, etc.).
+- Trend detection: collect and aggregate hashtags, cashtags and URLs to identify emerging topics, viral posts, or breaking news quickly.
+- Market and investor signals: extract cashtags (e.g., $AAPL, €ETH) together with sentiment cues (all-caps, emojis) to feed lightweight trading or research pipelines.
+- Community network analysis: use mention pairs to build interaction graphs that reveal influencers, community structure, and reply networks.
+- Misinformation / source tracing: extract URLs and quoted text to support fact-check workflows and provenance tracing of shared claims.
+- Dataset preparation for ML: produce structured features (mentions, hashtags, emojis) to accelerate annotation, classification, and supervised model training.
+- Archival and compliance: persist mentions, URLs and quoted content when collecting datasets for legal, compliance, or historical archiving purposes.
+- Linguistic and cultural research: analyze emoji usage, punctuation emphasis and mention patterns to study communication norms across communities.
 
 ## Input Data
 
