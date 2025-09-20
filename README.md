@@ -70,6 +70,8 @@ Follow these steps to run the extractor and produce the CSV output. Commands ass
 
 ## Technical Details
 
+Mentions are user-references in social posts (for example `@alice` on Twitter or `@alice@instance.social` on Mastodon). In this project mentions are detected by a single regular expression defined in `entity_extractor.py`: `(?<!\w)@[\w.\-]+(?:@[\w\.\-]+\.\w+)?`. This pattern matches an `at-sign(@)` not preceded by a word character, followed by a username (letters, digits, underscore, dot, hyphen) and optionally a second `@` plus an instance/domain to capture Fediverse/Mastodon handles. The negative lookbehind helps avoid matching mentions that are embedded inside other words, but edge cases (trailing punctuation, emails, or unusual unicode characters) may still require post-processing or normalization. See `entity_extractor.py` for the canonical regex and its usage.
+
 This section briefly explains the implementation of `entity_extractor.py` and the `index.ipynb` workflow in clear, semi-formal points so you can understand, maintain, or extend the code.
 
 entity_extractor.py
