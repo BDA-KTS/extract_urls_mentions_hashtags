@@ -91,7 +91,6 @@ index.ipynb (cell-by-cell overview)
 
 Implementation tips
 - Run cells in order, ensure Python 3.10 (or update pinned deps), and `pip install -r requirements.txt` (or use Pipfile/pipenv).
-- Test with varied Unicode and Mastodon mention samples. Consider expanding emoji detection and adding unit tests for regex edge cases.
 
 ## Contact
 
