@@ -30,6 +30,10 @@ def extract_entities(ls_posts):
         for name, pattern in patterns.items():
             if name in ['Negations', 'Time_expressions']:
                 found = re.findall(pattern, post.lower())
+            elif name == 'Quoted_text':
+                # Special handling for quoted text to flatten tuples
+                matches = re.findall(pattern, post)
+                found = [match[0] if match[0] else match[1] for match in matches]
             else:
                 found = re.findall(pattern, post)
             dict_entities[name].append(found)
