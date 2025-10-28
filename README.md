@@ -52,22 +52,16 @@ The method is tested with Python 3.10 and should work with other Python versions
 
 ## Technical Details
 
-Mentions are user-references in social posts (for example `@alice` on Twitter or `@alice@instance.social` on Mastodon). In this project mentions are detected by a single regular expression defined in `entity_extractor.py`: `(?<!\w)@[\w.\-]+(?:@[\w\.\-]+\.\w+)?`. This pattern matches an `at-sign(@)` not preceded by a word character, followed by a username (letters, digits, underscore, dot, hyphen) and optionally a second `@` plus an instance/domain to capture Fediverse/Mastodon handles. The negative lookbehind helps avoid matching mentions that are embedded inside other words, but edge cases (trailing punctuation, emails, or unusual unicode characters) may still require post-processing or normalization. See `entity_extractor.py` for the canonical regex and its usage.
+This method extracts a mix of entities including the common text entities e.g., punctuations, time expressions etc., the digital text entities e.g., Unique resource link (URL) and pay-level domains (PLDs), and social media entities e.g., mentions and hashtags. It is very common with digital content to provide relevant resources as URLs (containing the PLDs as example.com where *.com* is first level and *example* is the second level domain). The PLDs are useful as aggregate of the URLs from a specific body e.g., which news agency has the highest rate of tweet deletions with the URLs citing their source [1]. 
 
-This section briefly explains the implementation of `entity_extractor.py` and the `index.ipynb` workflow in clear, semi-formal points so you can understand, maintain, or extend the code.
+The social media related entities are more known to the social media users. The mentions are used to refer/respond to a person, give credit or simply to draw other users' attention to a post of common interest. They come with a slight variation across platforms e.g., X (formerly Twitter) uses mentions as `@alice`, while the same same for Mastodon users is `@alice@instance.social`. The hashtags are used to associate the post with a specific topic category, school of thought or campaign. They are most often popularized by early adopters where the general public jump in to share their opinions. There are also instances of promoting or demoting social movements using hashtags. For example 20% of the accounts contributing *Brexit* were later found inactive [2]. It is not unusual that these movements initiated with hashtags become a trending topic, questioning the decisions of the governments, institutions and individuals. 
 
-entity_extractor.py
+This method limits to basic resources using only regular expressions to detect the mentioned entities. The regular expressions can be found in the file `entity_extractor.py` and be extended with newer entities and newer forms of existing entities. It may also be useful to consider using the `emoji` or spaCy packages for more robust entity extraction.
 
-- Purpose: Implements a single public function `extract_entities(ls_posts)` that accepts a list of post strings and returns a pandas DataFrame where each column is an entity type and each row corresponds to a post.
-- Patterns: A `patterns` dict defines named regular expressions for: Mentions (including Mastodon-style `@user@instance`), Hashtags (`#word`), Cashtags (`$` and `€` + ticker), URLs (`http(s)://...` and `www.`), Quoted text, Punctuations, Punctuation emphasis (repeated `!`, `?`, `.`), All-caps words, Negations (`not, no, never, none, n't`), Time expressions (today, tomorrow, times, etc.), and a basic Unicode emoji range.
-- Extraction flow: Builds `dict_entities` with empty lists for each column, copies `ls_posts` to the `Posts` key, then iterates each post and each pattern. For `Negations` and `Time_expressions` the post is lowercased before regex matching to improve detection. Matches from `re.findall` are appended as lists so the resulting DataFrame column values are lists of matches.
-- Output: Returns a pandas DataFrame. Typical usage writes this DataFrame to CSV (`to_csv`) which serializes lists to strings for storage.
-- Dependencies & notes: Uses `re`, `pandas`, and imports `emoji` though emoji handling is currently implemented via a Unicode range and could be improved. Limitations include regex edge-cases, incomplete emoji coverage, and punctuation tokenization.
+## References
 
-Suggestions: consider using the `emoji` library utilities, URL normalization, or an NLP library (spaCy) for more robust entity extraction and unit tests for edge cases.
-
-Extending extraction: consider integrating `emoji` helpers, URL normalization, or an NLP library (spaCy) for more robust entity recognition.
-
+[1] Khan, M. T., Dimitrov, D., & Dietze, S. (2025, September). Characterization of Tweet Deletion Patterns in the Context of COVID-19 Discourse and Polarization. In Proceedings of the 36th ACM Conference on Hypertext and Social Media (pp. 43-47).
+[2] Bastos, M. (2021). This account doesn’t exist: Tweet decay and the politics of deletion in the brexit debate. American Behavioral Scientist, 65(5), 757-773.
 
 ## Contact
 
