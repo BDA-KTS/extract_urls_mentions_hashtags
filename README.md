@@ -6,9 +6,9 @@ The method extracts useful entities from social media posts such as URLs, hashta
 
 ## Use Cases
 
-- The study the impact of users reaction and increase in their engagement with posts having URLs, hashtags, and mentioned compared to the posts without the mentioned entities on the same topic.
-- Comparing the use of puntuation emphasis, all caps, and emojis between the social media posts on different topics indicate how formal or informal the general language is.
-- Identifying collective activites and coordination patterns leading to real-time mobilization at the time of protests and political unrest.
+- To study the impact of users reaction and increase in their engagement with posts having URLs, hashtags, and mentioned compared to the posts without the mentioned entities on the same topic.
+- Comparing the use of puntuation emphasis, all caps, and emojis between the social media posts on different topics indicating how formal or informal the general language is.
+- To study the use of time expression in identifying collective activites and coordination patterns leading to real-time mobilization at the time of protests and political unrest.
 
 ## Input Data
 
@@ -52,9 +52,9 @@ The method is tested with Python 3.10 and should work with other Python versions
 
 ## Technical Details
 
-This method extracts a mix of entities including the common text entities e.g., punctuations, time expressions etc., the digital text entities e.g., Unique resource link (URL) and pay-level domains (PLDs), and social media entities e.g., mentions and hashtags. It is very common with digital content to provide relevant resources as URLs (containing the PLDs as example.com where *.com* is first level and *example* is the second level domain). The PLDs are useful as aggregate of the URLs from a specific body e.g., which news agency has the highest rate of tweet deletions with the URLs citing their source [1]. 
+This method extracts a mix of entities including the common text entities e.g., punctuations, time expressions etc., the digital text entities e.g., Unique resource link (URL), pay-level domains (PLDs) and emojis, and social media entities e.g., mentions and hashtags. It is very common with digital content to provide relevant resources as URLs and its PLD e.g., the URL *https://example.com/category/topic-of-the-post* has *example.com* as PLD where *.com* is first level and *example* is the second level domain). The PLDs are useful in aggregating the use of the URLs from a specific body e.g., which news agency has the highest rate of tweet deletions with the URLs citing their source [1]. 
 
-The social media related entities are more known to the social media users. The mentions are used to refer/respond to a person, give credit or simply to draw other users' attention to a post of common interest. They come with a slight variation across platforms e.g., X (formerly Twitter) uses mentions as `@alice`, while the same same for Mastodon users is `@alice@instance.social`. The hashtags are used to associate the post with a specific topic category, school of thought or campaign. They are most often popularized by early adopters where the general public jump in to share their opinions. There are also instances of promoting or demoting social movements using hashtags. For example 20% of the accounts contributing *Brexit* were later found inactive [2]. It is not unusual that these movements initiated with hashtags become a trending topic, questioning the decisions of the governments, institutions and individuals. 
+The social media related entities are more known to the social media users. The mentions are used to refer/respond to a person, give credit or simply to draw other users' attention to a post of common interest. They come with a slight variation across platforms e.g., X (formerly Twitter) uses mentions as *@alice*, while the same for Mastodon users is *@alice@instance.social*. The hashtags are used to associate the post with a specific topic category, school of thought or campaign. They are often popularized by early adopters where the general public jump in to share their opinions. There are also instances of campaigning through hashtags to promote or demoting social movements. For example 20% of the accounts contributing *Brexit* were later found inactive [2]. It is not unusual that the movements initiated with hashtags become a trending topic, questioning the decisions of the governments, institutions and individuals. 
 
 This method limits to basic resources using only regular expressions to detect the mentioned entities. The regular expressions can be found in the file `entity_extractor.py` and be extended with newer entities and newer forms of existing entities. It may also be useful to consider using the `emoji` or spaCy packages for more robust entity extraction.
 
