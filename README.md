@@ -2,18 +2,13 @@
 
 ## Description
 
-The method extracts useful entities from social media posts such as URLs, hashtags, cashtags ($ and €), mentions (including Mastodon mentions), quoted texts, punctuations, punctuation emphasis (e.g., !!!), all caps words, negations, time expressions (e.g., today, next week), and emojis. It's a very simple method using only regular expressions to determine the mentioned entities. The method reads data from a CSV file with posts per row and writes output to a CSV file having post text and the extracted entities as respective columns.
+The method extracts useful entities from social media posts such as URLs, hashtags, cashtags ($ and €), mentions (including Mastodon mentions), quoted texts, punctuations, punctuation emphasis (e.g., !!!), all caps words, negations, time expressions (e.g., today, next week), and emojis. It is a very simple method using only regular expressions to determine the mentioned entities. The method reads data from a CSV file with posts per row and writes output to a CSV file having the post text followed by the respective columns of the extracted entities.
 
 ## Use Cases
 
-- Social listening and brand monitoring: detect mentions and hashtags to track when a brand, product, or individual is discussed across platforms (Twitter, Mastodon, etc.).
-- Trend detection: collect and aggregate hashtags, cashtags and URLs to identify emerging topics, viral posts, or breaking news quickly.
-- Market and investor signals: extract cashtags (e.g., $AAPL, €ETH) together with sentiment cues (all-caps, emojis) to feed lightweight trading or research pipelines.
-- Community network analysis: use mention pairs to build interaction graphs that reveal influencers, community structure, and reply networks.
-- Misinformation / source tracing: extract URLs and quoted text to support fact-check workflows and provenance tracing of shared claims.
-- Dataset preparation for ML: produce structured features (mentions, hashtags, emojis) to accelerate annotation, classification, and supervised model training.
-- Archival and compliance: persist mentions, URLs and quoted content when collecting datasets for legal, compliance, or historical archiving purposes.
-- Linguistic and cultural research: analyze emoji usage, punctuation emphasis and mention patterns to study communication norms across communities.
+- The study the impact of users reaction and increase in their engagement with posts having URLs, hashtags, and mentioned compared to the posts without the mentioned entities on the same topic.
+- Comparing the use of puntuation emphasis, all caps, and emojis between the social media posts on different topics indicate how formal or informal the general language is.
+- Identifying collective activites and coordination patterns leading to real-time mobilization at the time of protests and political unrest.
 
 ## Input Data
 
@@ -46,36 +41,14 @@ The method runs on a small virtual machine provided by a cloud computing company
   
 ## Environment Setup
 
-1. **Prepare the environment**
-   
-- Recommended Python: 3.10 (the pinned dependencies were tested with 3.10). Create and activate a virtual environment:
-```    
-  python3 -m venv .venv
-  source .venv/bin/activate
-```
-
-- **Install dependencies:**
+The method is tested with Python 3.10 and should work with other Python versions as well. Use the following command to setup the virtual working environment by installing all dependencies;
 
   ```pip install -r requirements.txt```
 
-2. **Run the notebook (interactive)**
-
-- Start Jupyter and open the notebook >  jupyter lab or jupyter notebook
-- Open `index.ipynb` and run the cells in order. The notebook:
-  - imports `extract_entities` from `entity_extractor.py`
-  - reads `data/input_social_posts.csv`
-  - runs the extractor and shows `df_extracted_entities.head()`
-  - writes output to `data/output_posts_with_entities.csv` (UTF-8)
-
-
 ## How to Use
 
-Follow these steps to run the extractor and produce the CSV output. Commands assumed to run in shell/terminal.
-
-- Input format: ensure a `Posts` column exists in `data/input_social_posts.csv` and that text encoding is UTF-8 to preserve emojis.
-- Large files: process in batches (e.g., read CSV in chunks) to avoid high memory usage.
-- Debugging: inspect intermediate DataFrames with `.head()` and check regex edge cases by crafting unit tests.
-- Extending extraction: consider integrating `emoji` helpers, URL normalization, or an NLP library (spaCy) for more robust entity recognition.
+- Open `index.ipynb` and execute the cells to use the method. It imports and uses the entity extraction function defined in `entity_extractor.py`.
+- Populate the input file `data/input_social_posts.csv` with social media posts on the topic of interest, keeping one per row (Optional: the file already has sample posts). 
 
 ## Technical Details
 
@@ -93,20 +66,8 @@ entity_extractor.py
 
 Suggestions: consider using the `emoji` library utilities, URL normalization, or an NLP library (spaCy) for more robust entity extraction and unit tests for edge cases.
 
-index.ipynb (cell-by-cell overview)
+Extending extraction: consider integrating `emoji` helpers, URL normalization, or an NLP library (spaCy) for more robust entity recognition.
 
-- Cell 1 (markdown): Notebook title.
-- Cell 2 (markdown): Short method description.
-- Cell 3 (python): Imports: `from entity_extractor import extract_entities` and `import pandas as pd`.
-- Cell 4 (python): Read input CSV (`data/input_social_posts.csv`) into `df_posts`.
-- Cell 5 (python): `df_posts.head()` to inspect the data.
-- Cell 6 (python): Convert posts to list and call `extract_entities(ls_posts)` producing `df_extracted_entities`.
-- Cell 7 (python): `df_extracted_entities.head()` to inspect output.
-- Cell 8 (python): Save output to `data/output_posts_with_entities.csv` with `to_csv` (UTF-8 recommended).
-
-Implementation tips
-
-- Run cells in order, ensure Python 3.10 (or update pinned deps), and `pip install -r requirements.txt` (or use Pipfile/pipenv).
 
 ## Contact
 
