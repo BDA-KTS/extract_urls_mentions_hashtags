@@ -61,6 +61,7 @@ This method limits to basic resources using only regular expressions to detect t
 ## References
 
 [1] Khan, M. T., Dimitrov, D., & Dietze, S. (2025, September). Characterization of Tweet Deletion Patterns in the Context of COVID-19 Discourse and Polarization. In Proceedings of the 36th ACM Conference on Hypertext and Social Media (pp. 43-47).
+
 [2] Bastos, M. (2021). This account doesn’t exist: Tweet decay and the politics of deletion in the brexit debate. American Behavioral Scientist, 65(5), 757-773.
 
 ## Contact
