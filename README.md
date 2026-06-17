@@ -58,6 +58,9 @@ The social media related entities are more known to the social media users. The 
 
 This method limits to basic resources using only regular expressions to detect the mentioned entities. The regular expressions can be found in the file `entity_extractor.py` and be extended with newer entities and newer forms of existing entities. It may also be useful to consider using the `emoji` or spaCy packages for more robust entity extraction.
 
+## Contact Details
+For any queries, please contact Taimoor Khan (taimoor.khan@gesis.org)
+
 ## References
 
 [1] Khan, M. T., Dimitrov, D., & Dietze, S. (2025, September). Characterization of Tweet Deletion Patterns in the Context of COVID-19 Discourse and Polarization. In Proceedings of the 36th ACM Conference on Hypertext and Social Media (pp. 43-47).
